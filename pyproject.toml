@@ -1,0 +1,62 @@
+[build-system]
+requires = ["flit_core >= 3.4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "Kickcom.py"
+readme = "README.md"
+authors = [
+    {name = "PredaaA"},
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.8"
+dynamic = ["version", "description"]
+dependencies = [
+    "aiohttp>=3.11.14",
+]
+
+[project.optional-dependencies]
+speed = [
+    "orjson>=3.10.16",
+    "aiodns>=1.1; sys_platform != 'win32'",
+    "Brotli",
+    "cchardet==2.1.7; python_version < '3.10'"
+]
+
+[project.urls]
+"Issue Tracker" = "https://github.com/PredaaA/kickcom.py/issues"
+"Source Code" = "https://github.com/PredaaA/kickcom.py"
+
+[tool.flit.module]
+name = "kickpy"
+
+[tool.black]
+line-length = 99
+target-version = ["py313"]
+
+[tool.isort]
+profile = "black"
+line_length = 99
+combine_as_imports = true
+filter_files = true
+
+[tool.ruff]
+target-version = "py313"
+line-length = 99
+select = ["C90", "E", "F", "I001", "PGH004", "RUF100"]
+fix = true
+fixable = ["I001"]
+isort.combine-as-imports = true
+force-exclude = true
