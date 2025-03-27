@@ -1,11 +1,19 @@
 # kickcom.py
 
-Async library for Kick.com API and webhooks
+[![PyPI](https://img.shields.io/pypi/v/kickcom.py)](https://pypi.org/project/kickcom.py)
 
-Find the kick.com [API documentation here](https://docs.kick.com/)
+Async library for Kick.com API and webhooks
 
 > [!NOTE]  
 > This is in alpha stage, it currently only supports app access tokens. PRs to improve are very welcome!
+
+Find the kick.com [API documentation here](https://docs.kick.com/)
+
+## Installation
+
+```bash
+pip install kickcom.py
+```
 
 ## Client
 

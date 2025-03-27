@@ -3,7 +3,7 @@ requires = ["flit_core >= 3.4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "Kickcom.py"
+name = "kickcom.py"
 readme = "README.md"
 authors = [
     {name = "PredaaA"},
@@ -36,6 +36,7 @@ speed = [
 ]
 
 [project.urls]
+"Home"= "https://github.com/PredaaA/kickcom.py"
 "Issue Tracker" = "https://github.com/PredaaA/kickcom.py/issues"
 "Source Code" = "https://github.com/PredaaA/kickcom.py"
 
