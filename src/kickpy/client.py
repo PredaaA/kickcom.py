@@ -4,7 +4,7 @@ from typing import Any, Dict, Union
 
 import aiohttp
 
-from kickpy import utils
+from kickpy import __version__, utils
 from kickpy.errors import (
     BadRequest,
     Forbidden,
@@ -24,6 +24,8 @@ from kickpy.webhooks.enums import WebhookEvent
 logging_listener = init_logging()
 log = logging.getLogger(__name__)
 
+USER_AGENT = f"kickcom.py/{__version__}"
+
 
 async def json_or_text(response: aiohttp.ClientResponse) -> Union[Dict[str, Any], str]:
     text = await response.text(encoding="utf-8")
@@ -41,8 +43,12 @@ class KickClient:
         self.client_secret = client_secret
         self._access_token: AccessToken | None = None
 
-        self.id_session = aiohttp.ClientSession(base_url="https://id.kick.com")
-        self.api_session = aiohttp.ClientSession(base_url="https://api.kick.com/public/v1/")
+        self.id_session = aiohttp.ClientSession(
+            base_url="https://id.kick.com", headers={"User-Agent": USER_AGENT}
+        )
+        self.api_session = aiohttp.ClientSession(
+            base_url="https://api.kick.com/public/v1/", headers={"User-Agent": USER_AGENT}
+        )
 
     async def close(self):
         """Close the client and all tasks."""
