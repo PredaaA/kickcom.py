@@ -33,6 +33,15 @@ if TYPE_CHECKING:
 
 log = logging.getLogger(__name__)
 
+_ENUM_TO_MODEL: dict[WebhookEvent, ALL_PAYLOADS] = {
+    WebhookEvent.CHANNEL_FOLLOWED: ChannelFollow,
+    WebhookEvent.CHANNEL_SUB_NEW: ChannelSubCreated,
+    WebhookEvent.CHANNEL_SUB_GIFTS: ChannelSubGifts,
+    WebhookEvent.CHANNEL_SUB_RENEWAL: ChannelSubRenewal,
+    WebhookEvent.CHAT_MESSAGE_SENT: ChatMessage,
+    WebhookEvent.LIVESTREAM_STATUS_UPDATED: LiveStreamStatusUpdated,
+}
+
 
 class Dispatcher:
     """A simple event dispatcher for webhook events."""
@@ -126,24 +135,10 @@ class WebhookServer(web.Application):
             return web.Response(status=400)
 
         data = await request.json()
-        self.dispatcher.dispatch(WebhookEvent(webhook_event), data)
-        # await self._webhook_handler(WebhookEvent(webhook_event), data)
+        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)](**data)
+        self.dispatcher.dispatch(WebhookEvent(webhook_event), payload)
 
         return web.Response(status=200)
-
-    # async def _webhook_handler(self, event_type: WebhookEvent, payload: dict):
-    #     if event_type == WebhookEvent.CHANNEL_FOLLOWED:
-    #         await self.on_channel_followed(ChannelFollow(**payload))
-    #     elif event_type == WebhookEvent.CHANNEL_SUB_NEW:
-    #         await self.on_channel_sub_new(ChannelSubCreated(**payload))
-    #     elif event_type == WebhookEvent.CHANNEL_SUB_GIFTS:
-    #         await self.on_channel_sub_gifts(ChannelSubGifts(**payload))
-    #     elif event_type == WebhookEvent.CHANNEL_SUB_RENEWAL:
-    #         await self.on_channel_sub_renewal(ChannelSubRenewal(**payload))
-    #     elif event_type == WebhookEvent.CHAT_MESSAGE_SENT:
-    #         await self.on_chat_message_sent(ChatMessage(**payload))
-    #     elif event_type == WebhookEvent.LIVESTREAM_STATUS_UPDATED:
-    #         await self.on_livestream_status_updated(LiveStreamStatusUpdated(**payload))
 
     async def on_channel_followed(self, payload: ChannelFollow):
         pass

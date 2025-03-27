@@ -1,3 +1,3 @@
 """Async library for Kick.com API and webhooks"""
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
