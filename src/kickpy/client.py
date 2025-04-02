@@ -170,13 +170,13 @@ class KickClient:
         data = await self._fetch_api("GET", "channels", params={"broadcaster_user_id": user_id})
         return Channel.from_dict(data["data"][0])
 
-    async def fetch_livestreams(self, user_id: int) -> list[LiveStream]:
-        """Get livestreams by the user ID.
+    async def fetch_livestream(self, user_id: int) -> LiveStream:
+        """Get livestream by the user ID.
 
         Parameters
         ----------
         user_id: int
-            The user ID to get livestreams from.
+            The user ID to get livestream from.
 
         Returns
         -------
@@ -185,6 +185,51 @@ class KickClient:
         """
         data = await self._fetch_api("GET", "livestreams", params={"user_id": user_id})
         return LiveStream.from_dict(data["data"][0])
+
+    async def fetch_livestreams(
+        self,
+        user_id: int | None,
+        category_id: int | None,
+        language: str | None,
+        limit: int | None,
+        sort: str = "viewer_count",
+    ) -> list[LiveStream]:
+        """Get livestreams.
+
+        Parameters
+        ----------
+        user_id: int
+            The user ID to get livestream from.
+        category_id: int
+            The category ID to get livestream from.
+        language: str
+            The language to get livestream from.
+        limit: int
+            The limit of livestreams to get.
+        sort: str
+            The sort order of livestreams. Either 'viewer_count' or 'created_at'.
+
+        Returns
+        -------
+        list[LiveStream]
+            A list of livestream data.
+        """
+        if sort not in {"viewer_count", "created_at"}:
+            raise ValueError("Invalid sort order. Must be either 'viewer_count' or 'created_at'.")
+
+        params = {}
+        if user_id:
+            params["user_id"] = user_id
+        if category_id:
+            params["category_id"] = category_id
+        if language:
+            params["language"] = language
+        if limit:
+            params["limit"] = limit
+        params["sort"] = sort
+
+        data = await self._fetch_api("GET", "livestreams", params=params)
+        return [LiveStream.from_dict(livestream) for livestream in data["data"]]
 
     async def fetch_categories(self, query: str) -> list[Category]:
         """Get categories by a query.
