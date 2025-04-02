@@ -18,6 +18,7 @@ from kickpy.models.access_token import AccessToken
 from kickpy.models.categories import Category
 from kickpy.models.channel import Channel
 from kickpy.models.events_subscriptions import EventsSubscription, EventsSubscriptionCreated
+from kickpy.models.livestreams import LiveStream
 from kickpy.models.user import User
 from kickpy.webhooks.enums import WebhookEvent
 
@@ -168,6 +169,22 @@ class KickClient:
         """
         data = await self._fetch_api("GET", "channels", params={"broadcaster_user_id": user_id})
         return Channel.from_dict(data["data"][0])
+
+    async def fetch_livestreams(self, user_id: int) -> list[LiveStream]:
+        """Get livestreams by the user ID.
+
+        Parameters
+        ----------
+        user_id: int
+            The user ID to get livestreams from.
+
+        Returns
+        -------
+        list[LiveStream]
+            A list of livestream data.
+        """
+        data = await self._fetch_api("GET", "livestreams", params={"user_id": user_id})
+        return LiveStream.from_dict(data["data"][0])
 
     async def fetch_categories(self, query: str) -> list[Category]:
         """Get categories by a query.
