@@ -4,7 +4,7 @@ from datetime import datetime
 from kickpy.models.webhooks._shared import User
 
 
-@dataclass
+@dataclass(slots=True)
 class LiveStreamStatusUpdated:
     """Represents a live stream status from a webhook."""
 

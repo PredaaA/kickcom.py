@@ -4,7 +4,7 @@ from .categories import Category
 from .stream import Stream
 
 
-@dataclass
+@dataclass(slots=True)
 class Channel:
     """Represents a Kick.com channel."""
 

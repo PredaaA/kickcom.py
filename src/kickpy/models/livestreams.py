@@ -21,7 +21,7 @@ from kickpy.models.categories import Category
 #     }
 
 
-@dataclass
+@dataclass(slots=True)
 class LiveStream:
     """Represents a Kick.com livestream."""
 

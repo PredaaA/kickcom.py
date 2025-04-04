@@ -4,19 +4,19 @@ from typing import List
 from kickpy.models.webhooks._shared import User
 
 
-@dataclass
+@dataclass(slots=True)
 class EmotePosition:
     s: int  # start position
     e: int  # end position
 
 
-@dataclass
+@dataclass(slots=True)
 class Emote:
     emote_id: str
     positions: List[EmotePosition]
 
 
-@dataclass
+@dataclass(slots=True)
 class ChatMessage:
     message_id: str
     broadcaster: User

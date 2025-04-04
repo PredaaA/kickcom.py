@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from kickpy.models.webhooks._shared import User
 
 
-@dataclass
+@dataclass(slots=True)
 class ChannelFollow:
     """Represents a channel follow event from a webhook."""
 

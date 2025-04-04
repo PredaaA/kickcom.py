@@ -4,7 +4,7 @@ from datetime import datetime
 from kickpy.models.webhooks._shared import User
 
 
-@dataclass
+@dataclass(slots=True)
 class ChannelSubCreated:
     """Represents a channel subscription created event from a webhook."""
 

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 
-@dataclass
+@dataclass(slots=True)
 class EventsSubscription:
     """Represents a Kick.com event subscriptions."""
 
@@ -29,7 +29,7 @@ class EventsSubscription:
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class EventsSubscriptionCreated:
     """Represents a Kick.com event subscriptions created."""
 

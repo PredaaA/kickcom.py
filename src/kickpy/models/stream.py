@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 
-@dataclass
+@dataclass(slots=True)
 class Stream:
     """Represents a Kick.com stream."""
 
