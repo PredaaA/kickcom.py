@@ -5,6 +5,10 @@ class KickpyException(Exception):
     """Base exception class for Kickpy errors."""
 
 
+class MissingArgument(KickpyException):
+    """Raised when a required argument is missing."""
+
+
 class NoClientId(KickpyException):
     """Raised when no client_id is provided."""
 

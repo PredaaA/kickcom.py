@@ -9,6 +9,7 @@ from kickpy.errors import (
     BadRequest,
     Forbidden,
     InternalServerError,
+    MissingArgument,
     NotFound,
     Ratelimited,
     Unauthorized,
@@ -154,20 +155,32 @@ class KickClient:
         data = await self._fetch_api("GET", "users", params={"id": user_id})
         return User(**data["data"][0])
 
-    async def fetch_channel(self, user_id: int) -> Channel:
-        """Get a channel by the broadcaster user ID.
+    async def fetch_channel(self, user_id: int | None = None, slug: str | None = None) -> Channel:
+        """Get a channel by the broadcaster user ID or slug.
 
         Parameters
         ----------
         user_id: int
             The broadcaster user ID.
+        slug: str
+            The broadcaster user slug.
 
         Returns
         -------
         Channel
             The channel data.
         """
-        data = await self._fetch_api("GET", "channels", params={"broadcaster_user_id": user_id})
+        if user_id and slug:
+            raise MissingArgument("Either user_id or slug must be provided, not both.")
+        if not user_id and not slug:
+            raise MissingArgument("Either user_id or slug must be provided.")
+
+        params = {}
+        if user_id:
+            params["broadcaster_user_id"] = user_id
+        if slug:
+            params["slug"] = slug
+        data = await self._fetch_api("GET", "channels", params=params)
         return Channel.from_dict(data["data"][0])
 
     async def fetch_livestream(self, user_id: int) -> LiveStream:
