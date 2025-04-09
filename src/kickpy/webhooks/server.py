@@ -135,28 +135,10 @@ class WebhookServer(web.Application):
             return web.Response(status=400)
 
         data = await request.json()
-        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)](**data)
+        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)].from_dict(**data)
         self.dispatcher.dispatch(WebhookEvent(webhook_event), payload)
 
         return web.Response(status=200)
-
-    async def on_channel_followed(self, payload: ChannelFollow):
-        pass
-
-    async def on_channel_sub_new(self, payload: ChannelSubCreated):
-        pass
-
-    async def on_channel_sub_gifts(self, payload: ChannelSubGifts):
-        pass
-
-    async def on_channel_sub_renewal(self, payload: ChannelSubRenewal):
-        pass
-
-    async def on_chat_message_sent(self, payload: ChatMessage):
-        log.info(payload)
-
-    async def on_livestream_status_updated(self, payload: LiveStreamStatusUpdated):
-        pass
 
     async def _run_app(  # noqa: C901
         self,
