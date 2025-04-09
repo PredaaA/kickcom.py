@@ -3,23 +3,6 @@ from datetime import datetime
 
 from kickpy.models.categories import Category
 
-# {
-#       "broadcaster_user_id": 1,
-#       "category": {
-#         "id": 1,
-#         "name": "text",
-#         "thumbnail": "text"
-#       },
-#       "channel_id": 1,
-#       "has_mature_content": true,
-#       "language": "text",
-#       "slug": "text",
-#       "started_at": "text",
-#       "stream_title": "text",
-#       "thumbnail": "text",
-#       "viewer_count": 1
-#     }
-
 
 @dataclass(slots=True)
 class LiveStream:

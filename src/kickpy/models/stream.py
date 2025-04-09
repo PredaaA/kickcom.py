@@ -12,6 +12,7 @@ class Stream:
     is_mature: bool
     language: str
     start_time: datetime
+    thumbnail: str
     viewer_count: int
 
     @classmethod
@@ -23,5 +24,6 @@ class Stream:
             is_mature=data["is_mature"],
             language=data["language"],
             start_time=datetime.fromisoformat(data["start_time"]),
+            thumbnail=data["thumbnail"],
             viewer_count=data["viewer_count"],
         )
