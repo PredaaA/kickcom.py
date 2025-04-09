@@ -20,7 +20,7 @@ class NoClientSecret(KickpyException):
 class HTTPException(KickpyException):
     """Base exception class for HTTP errors."""
 
-    def __init__(self, response: ClientResponse, message: str | None):
+    def __init__(self, response: ClientResponse, message: str | None = None) -> None:
         self.response: ClientResponse = response
         self.status: int = response.status
         self.message: str | None = message

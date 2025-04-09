@@ -14,7 +14,6 @@ from kickpy.errors import (
     Ratelimited,
     Unauthorized,
 )
-from kickpy.logger import init_logging
 from kickpy.models.access_token import AccessToken
 from kickpy.models.categories import Category
 from kickpy.models.channel import Channel
@@ -23,7 +22,6 @@ from kickpy.models.livestreams import LiveStream
 from kickpy.models.user import User
 from kickpy.webhooks.enums import WebhookEvent
 
-logging_listener = init_logging()
 log = logging.getLogger(__name__)
 
 USER_AGENT = f"kickcom.py/{__version__}"
@@ -56,7 +54,6 @@ class KickClient:
         """Close the client and all tasks."""
         await self.id_session.close()
         await self.api_session.close()
-        logging_listener.stop()
 
     async def _fetch_api(self, method: str, endpoint: str, **kwargs) -> dict:
         token = await self._fetch_access_token()
@@ -87,6 +84,9 @@ class KickClient:
                 raise InternalServerError(resp)
 
             data = await json_or_text(resp)
+
+        if "data" in data and not data["data"]:
+            raise NotFound(data)
 
         return data
 
