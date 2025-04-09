@@ -9,7 +9,6 @@ class EventsSubscription:
     app_id: str
     broadcaster_user_id: int
     created_at: datetime
-    expires_at: datetime
     event: str
     id: str
     method: str
@@ -22,7 +21,6 @@ class EventsSubscription:
             app_id=data["app_id"],
             broadcaster_user_id=data["broadcaster_user_id"],
             created_at=datetime.fromisoformat(data["created_at"]),
-            expires_at=datetime.fromisoformat(data["expires_at"]),
             event=data["event"],
             id=data["id"],
             method=data["method"],

@@ -12,6 +12,7 @@ class ChannelSubGifts:
     gifter: User | None
     giftees: list[User]
     created_at: datetime
+    expires_at: datetime
 
     @classmethod
     def from_dict(cls, data: dict):
@@ -20,4 +21,5 @@ class ChannelSubGifts:
             gifter=User(**data["gifter"]) if data["gifter"] else None,
             giftees=[User(**giftee) for giftee in data["giftees"]],
             created_at=datetime.fromisoformat(data["created_at"]),
+            expires_at=datetime.fromisoformat(data["expires_at"]),
         )

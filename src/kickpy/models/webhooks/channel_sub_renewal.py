@@ -12,6 +12,7 @@ class ChannelSubRenewal:
     subscriber: User
     duration: int
     created_at: datetime
+    expires_at: datetime
 
     @classmethod
     def from_dict(cls, data: dict):
@@ -20,4 +21,5 @@ class ChannelSubRenewal:
             subscriber=User(**data["subscriber"]),
             duration=data["duration"],
             created_at=datetime.fromisoformat(data["created_at"]),
+            expires_at=datetime.fromisoformat(data["expires_at"]),
         )
