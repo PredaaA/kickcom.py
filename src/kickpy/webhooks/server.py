@@ -26,6 +26,7 @@ from kickpy.models.webhooks import (
     ChatMessage,
     LiveStreamStatusUpdated,
 )
+from kickpy.utils import json_loads
 from kickpy.webhooks.enums import WebhookEvent
 
 if TYPE_CHECKING:
@@ -134,8 +135,8 @@ class WebhookServer(web.Application):
         if not signature_valid:
             return web.Response(status=400)
 
-        data = await request.json()
-        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)].from_dict(**data)
+        data: dict = await request.json(loads=json_loads)
+        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)].from_dict(data)
         self.dispatcher.dispatch(WebhookEvent(webhook_event), payload)
 
         return web.Response(status=200)

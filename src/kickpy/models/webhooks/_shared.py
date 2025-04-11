@@ -46,5 +46,5 @@ class User:
             is_verified=data["is_verified"],
             profile_picture=data["profile_picture"],
             channel_slug=data["channel_slug"],
-            identity=Identity.from_dict(**data["identity"]) if data.get("identity") else None,
+            identity=Identity.from_dict(data["identity"]) if data.get("identity") else None,
         )
