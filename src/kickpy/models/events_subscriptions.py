@@ -15,18 +15,9 @@ class EventsSubscription:
     updated_at: datetime
     version: int
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            app_id=data["app_id"],
-            broadcaster_user_id=data["broadcaster_user_id"],
-            created_at=datetime.fromisoformat(data["created_at"]),
-            event=data["event"],
-            id=data["id"],
-            method=data["method"],
-            updated_at=datetime.fromisoformat(data["updated_at"]),
-            version=data["version"],
-        )
+    def __post_init__(self) -> None:
+        self.created_at = datetime.fromisoformat(self.created_at)
+        self.updated_at = datetime.fromisoformat(self.updated_at)
 
 
 @dataclass(slots=True)

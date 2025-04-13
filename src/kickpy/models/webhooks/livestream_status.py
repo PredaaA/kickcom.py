@@ -14,12 +14,7 @@ class LiveStreamStatusUpdated:
     started_at: datetime
     ended_at: datetime | None
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            broadcaster=User(**data["broadcaster"]),
-            is_live=data["is_live"],
-            title=data["title"],
-            started_at=datetime.fromisoformat(data["started_at"]),
-            ended_at=datetime.fromisoformat(data["ended_at"]) if data["ended_at"] else None,
-        )
+    def __post_init__(self) -> None:
+        self.broadcaster = User(**self.broadcaster)
+        self.started_at = datetime.fromisoformat(self.started_at)
+        self.ended_at = datetime.fromisoformat(self.ended_at) if self.ended_at else None

@@ -10,9 +10,6 @@ class ChannelFollow:
     broadcaster: User
     follower: User
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            broadcaster=User(**data["broadcaster"]),
-            follower=User(**data["follower"]),
-        )
+    def __post_init__(self) -> None:
+        self.broadcaster = User(**self.broadcaster)
+        self.follower = User(**self.follower)

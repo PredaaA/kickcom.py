@@ -97,7 +97,7 @@ class KickClient:
         try:
             with open(".kick.token.json", "r") as f:
                 json_data = utils.json_loads(f.read())
-                access_token = AccessToken.from_dict(json_data)
+                access_token = AccessToken(**json_data)
                 if access_token.expires_at > datetime.now():
                     self._access_token = access_token
                     return access_token
@@ -117,9 +117,10 @@ class KickClient:
             if resp.status != 200:
                 raise InternalServerError(resp, "Failed to fetch access token.")
 
-            data = await resp.json()
+            data: dict = await resp.json()
 
-        access_token = AccessToken.from_dict(data)
+        data["expires_at"] = datetime.now().timestamp() + data.pop("expires_in", 0)
+        access_token = AccessToken(**data)
         with open(".kick.token.json", "w+") as f:
             f.write(utils.json_dumps(access_token.to_dict()))
 
@@ -181,7 +182,7 @@ class KickClient:
         if slug:
             params["slug"] = slug
         data = await self._fetch_api("GET", "channels", params=params)
-        return Channel.from_dict(data["data"][0])
+        return Channel(**data["data"][0])
 
     async def fetch_livestream(self, user_id: int) -> LiveStream:
         """Get livestream by the user ID.
@@ -197,14 +198,14 @@ class KickClient:
             A list of livestream data.
         """
         data = await self._fetch_api("GET", "livestreams", params={"user_id": user_id})
-        return LiveStream.from_dict(data["data"][0])
+        return LiveStream(**data["data"][0])
 
     async def fetch_livestreams(
         self,
-        user_id: int | None,
-        category_id: int | None,
-        language: str | None,
-        limit: int | None,
+        user_id: int | None = None,
+        category_id: int | None = None,
+        language: str | None = None,
+        limit: int | None = None,
         sort: str = "viewer_count",
     ) -> list[LiveStream]:
         """Get livestreams.
@@ -242,7 +243,7 @@ class KickClient:
         params["sort"] = sort
 
         data = await self._fetch_api("GET", "livestreams", params=params)
-        return [LiveStream.from_dict(livestream) for livestream in data["data"]]
+        return [LiveStream(**livestream) for livestream in data["data"]]
 
     async def fetch_categories(self, query: str) -> list[Category]:
         """Get categories by a query.
@@ -269,7 +270,7 @@ class KickClient:
             A list of EventsSubscription data.
         """
         data = await self._fetch_api("GET", "events/subscriptions")
-        return [EventsSubscription.from_dict(sub) for sub in data["data"]]
+        return [EventsSubscription(**sub) for sub in data["data"]]
 
     async def subscribe_to_event(
         self, event_type: WebhookEvent, user_id: int

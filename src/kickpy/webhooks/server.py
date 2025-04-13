@@ -136,7 +136,7 @@ class WebhookServer(web.Application):
             return web.Response(status=400)
 
         data: dict = await request.json(loads=json_loads)
-        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)].from_dict(data)
+        payload = _ENUM_TO_MODEL[WebhookEvent(webhook_event)](**data)
         self.dispatcher.dispatch(WebhookEvent(webhook_event), payload)
 
         return web.Response(status=200)

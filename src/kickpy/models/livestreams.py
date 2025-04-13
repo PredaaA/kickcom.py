@@ -19,17 +19,6 @@ class LiveStream:
     thumbnail: str
     viewer_count: int
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            broadcaster_user_id=data["broadcaster_user_id"],
-            category=Category(**data["category"]),
-            channel_id=data["channel_id"],
-            has_mature_content=data["has_mature_content"],
-            language=data["language"],
-            slug=data["slug"],
-            started_at=datetime.fromisoformat(data["started_at"]),
-            stream_title=data["stream_title"],
-            thumbnail=data["thumbnail"],
-            viewer_count=data["viewer_count"],
-        )
+    def __post_init__(self) -> None:
+        self.category = Category(**self.category)
+        self.started_at = datetime.fromisoformat(self.started_at)

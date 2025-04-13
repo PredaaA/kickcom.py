@@ -8,17 +8,11 @@ class AccessToken:
     expires_at: datetime
     token_type: str
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        expires_at = (
-            datetime.fromtimestamp(data["expires_at"])
-            if data.get("expires_at")
-            else datetime.fromtimestamp(datetime.now().timestamp() + data["expires_in"])
-        )
-        return cls(
-            access_token=data["access_token"],
-            expires_at=expires_at,
-            token_type=data["token_type"],
+    def __post_init__(self) -> None:
+        self.expires_at = (
+            datetime.fromtimestamp(self.expires_at)
+            if isinstance(self.expires_at, int)
+            else self.expires_at
         )
 
     def to_dict(self) -> dict:

@@ -14,12 +14,9 @@ class ChannelSubGifts:
     created_at: datetime
     expires_at: datetime
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            broadcaster=User(**data["broadcaster"]),
-            gifter=User(**data["gifter"]) if data["gifter"] else None,
-            giftees=[User(**giftee) for giftee in data["giftees"]],
-            created_at=datetime.fromisoformat(data["created_at"]),
-            expires_at=datetime.fromisoformat(data["expires_at"]),
-        )
+    def __post_init__(self) -> None:
+        self.broadcaster = User(**self.broadcaster)
+        self.gifter = User(**self.gifter) if self.gifter else None
+        self.giftees = [User(**giftee) for giftee in self.giftees]
+        self.created_at = datetime.fromisoformat(self.created_at)
+        self.expires_at = datetime.fromisoformat(self.expires_at)

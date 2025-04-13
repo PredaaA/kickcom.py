@@ -16,14 +16,6 @@ class Channel:
     stream_title: str
     category: Category
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            broadcaster_user_id=data["broadcaster_user_id"],
-            slug=data["slug"],
-            channel_description=data["channel_description"],
-            banner_picture=data["banner_picture"],
-            stream=Stream(**data["stream"]),
-            stream_title=data["stream_title"],
-            category=Category(**data["category"]),
-        )
+    def __post_init__(self) -> None:
+        self.stream = Stream(**self.stream)
+        self.category = Category(**self.category)

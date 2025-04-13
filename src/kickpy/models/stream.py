@@ -15,15 +15,5 @@ class Stream:
     thumbnail: str
     viewer_count: int
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            url=data["url"],
-            key=data["key"],
-            is_live=data["is_live"],
-            is_mature=data["is_mature"],
-            language=data["language"],
-            start_time=datetime.fromisoformat(data["start_time"]),
-            thumbnail=data["thumbnail"],
-            viewer_count=data["viewer_count"],
-        )
+    def __post_init__(self) -> None:
+        self.start_time = datetime.fromisoformat(self.start_time)

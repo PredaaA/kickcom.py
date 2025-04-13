@@ -15,14 +15,10 @@ class Identity:
     """Represents a user's identity from a webhook."""
 
     username_color: str
-    badges: list[Badge] | None
+    badges: list[Badge]
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            username_color=data["username_color"],
-            badges=[Badge(**badge) for badge in data["badges"]] if data.get("badges") else None,
-        )
+    def __post_init__(self) -> None:
+        self.badges = [Badge(**badge) for badge in self.badges] if self.badges else []
 
 
 @dataclass(slots=True)
@@ -37,14 +33,5 @@ class User:
     channel_slug: str
     identity: Identity | None
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            is_anonymous=data["is_anonymous"],
-            user_id=data["user_id"],
-            username=data["username"],
-            is_verified=data["is_verified"],
-            profile_picture=data["profile_picture"],
-            channel_slug=data["channel_slug"],
-            identity=Identity.from_dict(data["identity"]) if data.get("identity") else None,
-        )
+    def __post_init__(self) -> None:
+        self.identity = Identity(**self.identity) if self.identity else None

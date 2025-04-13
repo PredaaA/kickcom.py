@@ -15,6 +15,9 @@ class Emote:
     emote_id: str
     positions: List[EmotePosition]
 
+    def __post_init__(self) -> None:
+        self.positions = [EmotePosition(**position) for position in self.positions]
+
 
 @dataclass(slots=True)
 class ChatMessage:
@@ -24,18 +27,7 @@ class ChatMessage:
     content: str
     emotes: List[Emote]
 
-    @classmethod
-    def from_dict(cls, data: dict):
-        return cls(
-            message_id=data["message_id"],
-            broadcaster=User(**data["broadcaster"]),
-            sender=User(**data["sender"]),
-            content=data["content"],
-            emotes=[
-                Emote(
-                    emote_id=emote["emote_id"],
-                    positions=[EmotePosition(**pos) for pos in emote["positions"]],
-                )
-                for emote in data["emotes"]
-            ],
-        )
+    def __post_init__(self) -> None:
+        self.broadcaster = User(**self.broadcaster)
+        self.sender = User(**self.sender)
+        self.emotes = [Emote(**emote) for emote in self.emotes]
