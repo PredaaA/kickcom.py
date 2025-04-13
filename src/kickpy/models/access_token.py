@@ -11,7 +11,7 @@ class AccessToken:
     def __post_init__(self) -> None:
         self.expires_at = (
             datetime.fromtimestamp(self.expires_at)
-            if isinstance(self.expires_at, int)
+            if isinstance(self.expires_at, (int, float))
             else self.expires_at
         )
 
