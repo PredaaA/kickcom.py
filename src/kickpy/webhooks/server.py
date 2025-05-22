@@ -24,6 +24,7 @@ from kickpy.models.webhooks import (
     ChannelSubGifts,
     ChannelSubRenewal,
     ChatMessage,
+    LiveStreamMetadataUpdated,
     LiveStreamStatusUpdated,
 )
 from kickpy.utils import json_loads
@@ -41,6 +42,7 @@ _ENUM_TO_MODEL: dict[WebhookEvent, ALL_PAYLOADS] = {
     WebhookEvent.CHANNEL_SUB_RENEWAL: ChannelSubRenewal,
     WebhookEvent.CHAT_MESSAGE_SENT: ChatMessage,
     WebhookEvent.LIVESTREAM_STATUS_UPDATED: LiveStreamStatusUpdated,
+    WebhookEvent.LIVESTREAM_METADATA_UPDATED: LiveStreamMetadataUpdated,
 }
 
 
