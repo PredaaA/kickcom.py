@@ -8,6 +8,8 @@ from kickpy.models.webhooks.chat_message import ChatMessage as ChatMessage
 from kickpy.models.webhooks.livestream_metadata import (
     LivestreamMetadata as LivestreamMetadata,
     LiveStreamMetadataUpdated as LiveStreamMetadataUpdated,
+)
+from kickpy.models.webhooks.livestream_status import (
     LiveStreamStatusUpdated as LiveStreamStatusUpdated,
 )
 
