@@ -5,6 +5,7 @@ from kickpy.models.webhooks.channel_sub_created import ChannelSubCreated as Chan
 from kickpy.models.webhooks.channel_sub_gifts import ChannelSubGifts as ChannelSubGifts
 from kickpy.models.webhooks.channel_sub_renewal import ChannelSubRenewal as ChannelSubRenewal
 from kickpy.models.webhooks.chat_message import ChatMessage as ChatMessage
+from kickpy.models.webhooks.kicks_gifted import KicksGifted as KicksGifted
 from kickpy.models.webhooks.livestream_metadata import (
     LivestreamMetadata as LivestreamMetadata,
     LiveStreamMetadataUpdated as LiveStreamMetadataUpdated,
@@ -12,6 +13,7 @@ from kickpy.models.webhooks.livestream_metadata import (
 from kickpy.models.webhooks.livestream_status import (
     LiveStreamStatusUpdated as LiveStreamStatusUpdated,
 )
+from kickpy.models.webhooks.moderation_banned import ModerationBanned as ModerationBanned
 
 ALL_PAYLOADS = Union[
     ChannelFollow,
@@ -21,4 +23,6 @@ ALL_PAYLOADS = Union[
     ChatMessage,
     LiveStreamStatusUpdated,
     LiveStreamMetadataUpdated,
+    ModerationBanned,
+    KicksGifted,
 ]
