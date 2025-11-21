@@ -11,6 +11,7 @@ class LiveStream:
     broadcaster_user_id: int
     category: Category
     channel_id: int
+    custom_tags: list[str]
     has_mature_content: bool
     language: str
     slug: str

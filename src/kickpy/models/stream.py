@@ -14,6 +14,7 @@ class Stream:
     start_time: datetime
     thumbnail: str
     viewer_count: int
+    custom_tags: list[str]
 
     def __post_init__(self) -> None:
         self.start_time = datetime.fromisoformat(self.start_time)
