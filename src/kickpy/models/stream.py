@@ -18,3 +18,4 @@ class Stream:
 
     def __post_init__(self) -> None:
         self.start_time = datetime.fromisoformat(self.start_time)
+        self.custom_tags = list(self.custom_tags)
