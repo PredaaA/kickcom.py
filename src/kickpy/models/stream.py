@@ -14,8 +14,8 @@ class Stream:
     start_time: datetime
     thumbnail: str
     viewer_count: int
-    custom_tags: list[str]
+    custom_tags: list[str] | None = None
 
     def __post_init__(self) -> None:
         self.start_time = datetime.fromisoformat(self.start_time)
-        self.custom_tags = list(self.custom_tags)
+        self.custom_tags = list(self.custom_tags) if self.custom_tags is not None else []
