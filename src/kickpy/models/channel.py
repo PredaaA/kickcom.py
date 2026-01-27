@@ -8,6 +8,8 @@ from .stream import Stream
 class Channel:
     """Represents a Kick.com channel."""
 
+    active_subscribers_count: int
+    canceled_subscribers_count: int
     broadcaster_user_id: int
     slug: str
     channel_description: str
