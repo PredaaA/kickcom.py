@@ -86,7 +86,7 @@ class KickClient:
             data = await json_or_text(resp)
 
         if "data" in data and not data["data"]:
-            raise NotFound(data)
+            raise NotFound(resp)
 
         return data
 
