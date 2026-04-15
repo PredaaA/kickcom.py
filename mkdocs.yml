@@ -1,0 +1,67 @@
+site_name: kickcom.py
+site_url: https://predaaa.github.io/kickcom.py
+site_description: Async library for Kick.com API and webhooks
+repo_url: https://github.com/PredaaA/kickcom.py
+repo_name: PredaaA/kickcom.py
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.code.annotate
+    - search.highlight
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            members_order: source
+            docstring_style: numpy
+            merge_init_into_class: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Authentication: authentication.md
+  - API Reference:
+      - KickClient: api/client.md
+      - Models: api/models.md
+      - Enums: api/enums.md
+      - Errors: api/errors.md
+  - Webhooks:
+      - Setup: webhooks/setup.md
+      - Events: webhooks/events.md

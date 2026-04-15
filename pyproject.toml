@@ -37,6 +37,7 @@ speed = [
     "cchardet==2.1.7; python_version < '3.10'"
 ]
 docs = [
+    "mkdocs>=1.6,<2",
     "mkdocs-material>=9.6",
     "mkdocstrings[python]>=0.29",
 ]
