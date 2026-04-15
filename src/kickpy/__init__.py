@@ -1,6 +1,6 @@
 """Async library for Kick.com API and webhooks"""
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from kickpy.client import KickClient
 from kickpy.enums import Scope
