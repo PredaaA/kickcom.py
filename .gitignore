@@ -173,5 +173,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-*.token.json
+.kick.*token.json
 test_*.py

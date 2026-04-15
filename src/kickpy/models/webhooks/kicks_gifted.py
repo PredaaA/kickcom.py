@@ -13,6 +13,7 @@ class Gift:
     type: str
     tier: str
     message: str
+    pinned_time_seconds: int = 0
 
 
 @dataclass(slots=True)

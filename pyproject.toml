@@ -36,6 +36,10 @@ speed = [
     "Brotli",
     "cchardet==2.1.7; python_version < '3.10'"
 ]
+docs = [
+    "mkdocs-material>=9.6",
+    "mkdocstrings[python]>=0.29",
+]
 
 [project.urls]
 "Home"= "https://github.com/PredaaA/kickcom.py"
@@ -58,8 +62,8 @@ filter_files = true
 [tool.ruff]
 target-version = "py313"
 line-length = 99
-select = ["C90", "E", "F", "I001", "PGH004", "RUF100"]
+lint.select = ["C90", "E", "F", "I001", "PGH004", "RUF100"]
 fix = true
-fixable = ["I001"]
-isort.combine-as-imports = true
+lint.fixable = ["I001"]
+lint.isort.combine-as-imports = true
 force-exclude = true

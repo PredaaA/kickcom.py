@@ -19,6 +19,7 @@ class LiveStream:
     stream_title: str
     thumbnail: str
     viewer_count: int
+    profile_picture: str | None = None
 
     def __post_init__(self) -> None:
         self.category = Category(**self.category)

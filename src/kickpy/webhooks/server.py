@@ -20,6 +20,7 @@ except ImportError:
 from kickpy.models.webhooks import (
     ALL_PAYLOADS,
     ChannelFollow,
+    ChannelRewardRedemption,
     ChannelSubCreated,
     ChannelSubGifts,
     ChannelSubRenewal,
@@ -39,13 +40,14 @@ log = logging.getLogger(__name__)
 
 _ENUM_TO_MODEL: dict[WebhookEvent, ALL_PAYLOADS] = {
     WebhookEvent.CHANNEL_FOLLOWED: ChannelFollow,
+    WebhookEvent.CHANNEL_REWARD_REDEMPTION_UPDATED: ChannelRewardRedemption,
     WebhookEvent.CHANNEL_SUB_NEW: ChannelSubCreated,
     WebhookEvent.CHANNEL_SUB_GIFTS: ChannelSubGifts,
     WebhookEvent.CHANNEL_SUB_RENEWAL: ChannelSubRenewal,
     WebhookEvent.CHAT_MESSAGE_SENT: ChatMessage,
     WebhookEvent.LIVESTREAM_STATUS_UPDATED: LiveStreamStatusUpdated,
     WebhookEvent.LIVESTREAM_METADATA_UPDATED: LiveStreamMetadataUpdated,
-    WebhookEvent.MODERATION_BANNED: ModerationBanned,
+    WebhookEvent.MODERATION_USER_BANNED: ModerationBanned,
     WebhookEvent.KICKS_GIFTED: KicksGifted,
 }
 

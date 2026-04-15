@@ -1,6 +1,9 @@
 from typing import Union
 
 from kickpy.models.webhooks.channel_follow import ChannelFollow as ChannelFollow
+from kickpy.models.webhooks.channel_reward_redemption import (
+    ChannelRewardRedemption as ChannelRewardRedemption,
+)
 from kickpy.models.webhooks.channel_sub_created import ChannelSubCreated as ChannelSubCreated
 from kickpy.models.webhooks.channel_sub_gifts import ChannelSubGifts as ChannelSubGifts
 from kickpy.models.webhooks.channel_sub_renewal import ChannelSubRenewal as ChannelSubRenewal
@@ -17,6 +20,7 @@ from kickpy.models.webhooks.moderation_banned import ModerationBanned as Moderat
 
 ALL_PAYLOADS = Union[
     ChannelFollow,
+    ChannelRewardRedemption,
     ChannelSubCreated,
     ChannelSubGifts,
     ChannelSubRenewal,

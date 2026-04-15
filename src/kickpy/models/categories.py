@@ -8,3 +8,4 @@ class Category:
     id: int
     name: str
     thumbnail: str
+    tags: list[str] | None = None
