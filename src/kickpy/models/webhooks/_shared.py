@@ -7,7 +7,7 @@ class Badge:
 
     text: str
     type: str
-    count: int | None
+    count: int | None = None
 
 
 @dataclass(slots=True)
