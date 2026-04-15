@@ -1,6 +1,6 @@
 site_name: kickcom.py
 site_url: https://predaaa.github.io/kickcom.py
-site_description: Async library for Kick.com API and webhooks
+site_description: Modern async Python wrapper for the Kick.com API with OAuth 2.1 PKCE, typed models, and webhook support
 repo_url: https://github.com/PredaaA/kickcom.py
 repo_name: PredaaA/kickcom.py
 

@@ -30,8 +30,8 @@ loop.run_forever()
 
 1. **Create a `WebhookServer`** with a `KickClient` and a callback route path
 2. **Register listeners** on the dispatcher for specific event types
-3. **Start the server** -- it listens for incoming POST requests from Kick
-4. **Signature verification** is automatic -- the server fetches the Kick public key and validates every request using RSA PKCS1v15 + SHA-256
+3. **Start the server** it listens for incoming POST requests from Kick
+4. **Signature verification** is automatic, the server fetches the Kick public key and validates every request using RSA PKCS1v15 + SHA-256
 
 ## Subscribing to Events
 

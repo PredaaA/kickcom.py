@@ -26,7 +26,7 @@ Required for endpoints that act on behalf of a user (chat, moderation, rewards, 
 
 ### Browser Flow (Built-in)
 
-The simplest approach -- the library opens the user's browser and captures the callback:
+The simplest approach, the library opens the user's browser and captures the callback:
 
 ```python
 from kickpy import KickClient, Scope
