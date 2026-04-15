@@ -6,6 +6,7 @@ repo_name: PredaaA/kickcom.py
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -52,6 +53,10 @@ markdown_extensions:
       alternate_style: true
   - toc:
       permalink: true
+
+extra:
+  umami:
+    website_id: "0f137296-6b79-4173-be23-60b4c58defa0"
 
 nav:
   - Home: index.md
